@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dream House Design — Designing Spaces, Building Dreams</title>
+<meta name="description" content="Dream House Design creates innovative, functional and sustainable architectural & civil engineering solutions for residential and commercial projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS (Updated to Match Logo & Pamphlet Theme) ============ */
+:root{
+  --ink:#0b162c;          /* Deep Navy from Logo */
+  --navy:#0b162c;
+  --navy-soft:#132242;
+  --porcelain:#f9f6f0;    /* Warm Alabaster / Clean Light Canvas */
+  --paper:#f0ebe1;
+  --brass:#c6902f;        /* Signature Gold / Amber from Logo */
+  --brass-light:#e2b052;  
+  --copper:#a16d22;
+  --stone:#8a94a6;
+  --charcoal:#152238;
+  --line: rgba(198,144,47,.3);
+  --line-soft: rgba(198,144,47,.15);
+  --ink-text:#0b162c;
+  --serif:'Fraunces', serif;
+  --sans:'Manrope', sans-serif;
+  --mono:'JetBrains Mono', monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  background:var(--porcelain);
+  color:var(--ink-text);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.lock{overflow:hidden;height:100vh;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+::selection{background:var(--brass);color:var(--porcelain);}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--brass);
+  display:flex;
+  align-items:center;
+  gap:.6em;
+}
+.eyebrow::before{
+  content:"";
+  width:26px;height:1px;
+  background:var(--brass);
+  display:inline-block;
+}
+.section{position:relative;padding:clamp(72px,10vw,140px) clamp(20px,6vw,80px);}
+.section-dark{background:var(--ink);color:var(--porcelain);}
+.container{max-width:1280px;margin:0 auto;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease), transform .9s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-32px);transition:opacity .9s var(--ease), transform .9s var(--ease);}
+.reveal-l.in{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(32px);transition:opacity .9s var(--ease), transform .9s var(--ease);}
+.reveal-r.in{opacity:1;transform:translateX(0);}
+.stagger > *{transition-delay:calc(var(--i,0) * 90ms);}
+
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-height:1.05;}
+.h-display{font-size:clamp(2.6rem,6.2vw,5.6rem);font-weight:500;}
+.h-section{font-size:clamp(2rem,4.2vw,3.4rem);font-weight:500;}
+p{line-height:1.7;color:inherit;}
+.lead{font-size:clamp(1.02rem,1.0vw,1.2rem);color:black;max-width:48ch;}
+.section-dark .lead{color:#b3bdd0;}
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;
+  padding:16px 30px;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--brass);
+  color:var(--porcelain);
+  background:var(--brass);
+  position:relative;overflow:hidden;
+  transition:color .4s var(--ease);
+}
+.btn span{position:relative;z-index:2;}
+.btn::before{
+  content:"";position:absolute;inset:0;background:var(--porcelain);
+  transform:translateY(101%);transition:transform .45s var(--ease);z-index:1;
+}
+.btn:hover{color:var(--ink);}
+.btn:hover::before{transform:translateY(0);}
+.btn.ghost{background:transparent;color:brass;border-color:var(--brass);}
+.btn.ghost::before{background:var(--brass);}
+.btn.ghost:hover{color:var(--porcelain);}
+.section-dark .btn.ghost{color:var(--porcelain);border-color:rgba(255,255,255,.4);}
+.section-dark .btn.ghost:hover{color:var(--ink);}
+
+/* corner registration marks — blueprint sheet motif */
+.plate{position:relative;}
+.plate::before,.plate::after,.plate .cm-tr,.plate .cm-bl{
+  content:"";position:absolute;width:14px;height:14px;
+  border-color:var(--line);border-style:solid;
+}
+.plate::before{top:18px;left:18px;border-width:1px 0 0 1px;}
+.plate::after{bottom:18px;right:18px;border-width:0 1px 1px 0;}
+
+/* ============ PRELOADER ============ */
+#preloader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .8s var(--ease), visibility .8s var(--ease);
+}
+#preloader.done{opacity:0;visibility:hidden;pointer-events:none;}
+#preloader svg{width:92px;height:92px;overflow:visible;}
+#preloader path{
+  fill:none;stroke:var(--brass-light);stroke-width:1.4;
+  stroke-dasharray:400;stroke-dashoffset:400;
+  animation:draw 2.1s var(--ease) forwards;
+}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.pre-word{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--stone);margin-top:22px;
+}
+.pre-num{
+  font-family:var(--mono);font-size:.7rem;color:var(--brass-light);margin-top:8px;letter-spacing:.1em;
+}
+.pre-bar{width:180px;height:1px;background:rgba(255,255,255,.12);margin-top:16px;position:relative;}
+.pre-bar i{position:absolute;left:0;top:0;height:100%;width:0%;background:var(--brass);transition:width .2s linear;}
+
+/* ============ SCROLL RULER ============ */
+#ruler{
+  position:fixed;left:22px;top:50%;transform:translateY(-50%);
+  height:38vh;width:24px;z-index:60;display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+#ruler .track{position:relative;width:1px;height:100%;background:rgba(11,22,44,.18);}
+#ruler .fill{position:absolute;top:0;left:0;width:100%;height:0%;background:var(--brass);transition:height .1s linear;}
+#ruler .lab{font-family:var(--mono);font-size:.6rem;color:var(--copper);writing-mode:vertical-rl;letter-spacing:.2em;}
+body.on-light #ruler .track{background:rgba(11,22,44,.15);}
+body.on-light #ruler .lab{color:var(--copper);}
+@media(max-width:1100px){#ruler{display:none;}}
+
+/* ============ NAV ============ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px clamp(20px,5vw,56px);
+  background: rgba(249, 246, 240, 0.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(198,144,47,.2);
+  transition:all .4s var(--ease);
+}
+header.scrolled{
+  padding:14px clamp(20px,5vw,56px);
+  background:rgba(11,22,44,0.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(198,144,47,.3);
+}
+header.scrolled .brand-text{color:var(--porcelain);}
+header.scrolled nav.primary-nav a{color:var(--porcelain);}
+header.scrolled .nav-call{color:var(--porcelain);}
+
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);}
+.brand-text{font-family:var(--serif);font-size:1.12rem;letter-spacing:.02em;line-height:1.1;color:var(--ink);}
+.brand-text small{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.22em;color:var(--copper);margin-top:3px;}
+nav.primary-nav{display:flex;align-items:center;gap:38px;}
+nav.primary-nav a{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);position:relative;padding-bottom:4px;transition:color .3s;
+}
+nav.primary-nav a::after{
+  content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--brass);transition:width .35s var(--ease);
+}
+nav.primary-nav a:hover::after{width:100%;}
+nav.primary-nav a:hover{color:var(--brass);}
+.nav-cta{display:flex;align-items:center;gap:22px;}
+.nav-call{font-family:var(--mono);font-size:.76rem;color:var(--ink);letter-spacing:.05em;display:flex;align-items:center;gap:8px;}
+@media(max-width:960px){
+  nav.primary-nav, .nav-cta{display:none;}
+  header{z-index:1200;}
+}
+
+/* burger */
+.burger{
+  width:44px;height:44px;display:none;align-items:center;justify-content:center;
+  position:relative;z-index:1100;flex:none;cursor:pointer;
+}
+@media(max-width:960px){.burger{display:flex;}}
+.burger span, .burger span::before, .burger span::after{
+  content:"";position:absolute;width:22px;height:2px;background:var(--ink);transition:transform .35s var(--ease), opacity .35s var(--ease), background .3s;
+}
+.burger span::before{transform:translateY(-7px);}
+.burger span::after{transform:translateY(7px);}
+.burger.open span{background:transparent;}
+.burger.open span::before{transform:translateY(0) rotate(45deg);background:var(--porcelain);}
+.burger.open span::after{transform:translateY(0) rotate(-45deg);background:var(--porcelain);}
+
+/* mobile menu */
+#mobile-menu{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--ink);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:100px 32px 40px;
+  clip-path:circle(0% at calc(100% - 42px) 44px);
+  transition:clip-path .7s var(--ease);
+}
+#mobile-menu.open{clip-path:circle(150% at calc(100% - 42px) 44px);}
+#mobile-menu ul{display:flex;flex-direction:column;gap:6px;}
+#mobile-menu li{overflow:hidden;}
+#mobile-menu a{
+  font-family:var(--serif);font-size:2.3rem;color:var(--porcelain);
+  display:block;padding:8px 0;
+  transform:translateY(110%);transition:transform .6s var(--ease);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+#mobile-menu.open a{transform:translateY(0);}
+.mm-foot{margin-top:30px;display:flex;flex-direction:column;gap:8px;color:var(--stone);font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;}
+.mm-foot a{color:var(--brass-light);}
+.mm-social{display:flex;gap:16px;margin-top:14px;}
+.mm-social a{width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--porcelain);}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;min-height:101svh;display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;background:var(--ink);
+}
+.hero-media{position:absolute;inset:0;z-index:0;}
+.hero-media video, .hero-media img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(0deg, rgba(11,22,44,.95) 0%, rgba(11,22,44,.6) 42%, rgba(11,22,44,.4) 65%, rgba(11,22,44,.75) 100%),
+    linear-gradient(90deg, rgba(11,22,44,.6) 0%, rgba(11,22,44,.1) 40%);
+}
+.hero-inner{position:relative;z-index:2;padding:0 clamp(20px,5vw,56px) clamp(48px,7vw,90px);width:100%;}
+.hero h1{color:var(--porcelain);max-width:16ch;}
+.hero h1 em{font-style:italic;color:var(--brass-light);}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-top:30px;flex-wrap:wrap;}
+.hero-copy{max-width:520px;}
+.hero-copy p{color:#d4dbe8;font-size:1.02rem;}
+.hero-actions{display:flex;gap:16px;margin-top:26px;flex-wrap:wrap;}
+.hero-meta{
+  display:flex;gap:44px;font-family:var(--mono);color:var(--stone);font-size:.72rem;letter-spacing:.08em;
+}
+.hero-meta div b{display:block;color:var(--brass-light);font-size:1.5rem;font-family:var(--serif);font-weight:500;letter-spacing:0;}
+.scroll-cue{
+  position:absolute;bottom:28px;right:clamp(20px,5vw,56px);z-index:3;
+  display:flex;align-items:center;gap:10px;color:var(--stone);font-family:var(--mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+}
+.scroll-cue .dot{width:7px;height:7px;border-radius:50%;border:1px solid var(--brass-light);position:relative;}
+.scroll-cue .dot::after{content:"";position:absolute;inset:2px;border-radius:50%;background:var(--brass-light);animation:pulse 1.8s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.2;}}
+
+/* marquee strip */
+.marquee-strip{
+  position:relative;z-index:2;background:var(--brass);color:var(--ink);
+  overflow:hidden;white-space:nowrap;border-top:1px solid rgba(11,22,44,.2);
+}
+.marquee-track{display:inline-flex;animation:scroll-x 32s linear infinite;}
+.marquee-track span{
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:14px 34px;display:inline-flex;align-items:center;gap:16px;border-right:1px solid rgba(11,22,44,.25);font-weight:300;
+}
+@keyframes scroll-x{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ============ ABOUT / SIGNATURE BLUEPRINT ============ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:center;}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;}}
+.about-copy .h-section{margin:18px 0 22px;color:var(--ink);}
+.about-copy p + p{margin-top:16px;}
+.about-stats{display:flex;gap:clamp(20px,4vw,48px);margin-top:40px;flex-wrap:wrap;}
+.stat{font-family:var(--mono);}
+.stat b{display:block;font-family:var(--serif);font-size:clamp(2rem,3.4vw,2.7rem);color:var(--ink);font-weight:500;}
+.stat span{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);}
+.blueprint-wrap{
+  position:relative;background:var(--ink);border:1px solid var(--line);
+  aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.blueprint-wrap svg{width:100%;height:100%;}
+.blueprint-wrap .bp-path{fill:none;stroke:var(--brass-light);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;}
+.blueprint-wrap .bp-fill{fill:rgba(198,144,47,.08);}
+.blueprint-wrap .bp-dim{stroke:rgba(198,144,47,.4);stroke-width:.6;}
+.blueprint-wrap .bp-label{font-family:var(--mono);font-size:5px;fill:var(--stone);letter-spacing:.05em;}
+.blueprint-cap{
+  position:absolute;bottom:16px;left:16px;right:16px;display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:.6rem;color:var(--stone);letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* ============ SERVICES ============ */
+.svc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:56px;}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+@media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.svc-grid{grid-template-columns:1fr;}}
+.svc-card{
+  background:var(--porcelain);padding:36px 30px;min-height:260px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;transition:background .45s var(--ease);
+}
+.svc-card:hover{background:var(--ink);}
+.svc-card:hover .svc-title, .svc-card:hover p{color:var(--porcelain);}
+.svc-card:hover .svc-list li{color:#b3bdd0;}
+.svc-card:hover .svc-num{color:var(--brass-light);}
+.svc-num{font-family:var(--mono);font-size:.7rem;color:var(--copper);letter-spacing:.1em;transition:color .4s var(--ease);}
+.svc-icon{width:38px;height:38px;margin:18px 0 20px;color:var(--brass);}
+.svc-title{font-family:var(--serif);font-size:1.32rem;font-weight:500;margin-bottom:10px;color:var(--ink);transition:color .4s var(--ease);}
+.svc-list{margin-top:14px;font-family:var(--mono);font-size:.72rem;letter-spacing:.03em;color:var(--copper);display:flex;flex-wrap:wrap;gap:6px 0;}
+.svc-list li{transition:color .4s var(--ease);}
+.svc-list li:not(:last-child)::after{content:" · ";color:var(--brass);}
+
+/* ============ PROCESS ============ */
+.process-strip{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.process-track{display:grid;grid-template-columns:repeat(5,1fr);}
+@media(max-width:900px){.process-track{grid-template-columns:1fr;}}
+.process-step{
+  padding:44px 26px;border-right:1px solid var(--line-soft);position:relative;
+}
+.process-track > *:last-child{border-right:none;}
+@media(max-width:900px){.process-step{border-right:none;border-bottom:1px solid var(--line-soft);}}
+.process-step .pnum{font-family:var(--mono);font-size:.68rem;color:var(--brass);letter-spacing:.1em;}
+.process-step h4{font-family:var(--serif);font-size:1.15rem;margin:14px 0 8px;font-weight:500;color:var(--ink);}
+.process-step p{font-size:.86rem;color:#4a5568;}
+
+/* ============ GALLERY (hex) ============ */
+.hex-grid{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:0;margin-top:10px;
+}
+.hex{
+  position:relative;width:clamp(180px,22vw,270px);
+  aspect-ratio:.87/1;
+  clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  margin:-10px -18px;
+  overflow:hidden;cursor:pointer;background:var(--ink);
+}
+.hex img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease), filter .6s;filter:grayscale(30%) brightness(.9);}
+.hex:hover img{transform:scale(1.12);filter:grayscale(0%) brightness(1);}
+.hex .hex-cap{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+  padding-bottom:30px;text-align:center;
+  background:linear-gradient(0deg, rgba(11,22,44,.9), transparent 55%);
+  opacity:0;transition:opacity .5s var(--ease);
+}
+.hex:hover .hex-cap{opacity:1;}
+.hex-cap b{font-family:var(--serif);color:var(--porcelain);font-size:1rem;font-weight:500;}
+.hex-cap span{font-family:var(--mono);font-size:.6rem;color:var(--brass-light);letter-spacing:.14em;text-transform:uppercase;margin-top:4px;}
+@media(max-width:640px){
+  .hex{width:44vw;margin:-6% -9%;}
+}
+
+/* ============ WHY US / STATS (dark) ============ */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:start;}
+@media(max-width:900px){.why-grid{grid-template-columns:1fr;}}
+.why-list{display:flex;flex-direction:column;margin-top:20px;}
+.why-item{
+  display:flex;align-items:flex-start;gap:18px;padding:22px 0;border-bottom:1px solid rgba(198,144,47,.2);
+}
+.why-item .wtag{font-family:var(--mono);font-size:.68rem;color:var(--brass);letter-spacing:.08em;flex:none;padding-top:4px;}
+.why-item h4{font-family:var(--serif);font-weight:500;font-size:1.15rem;color:var(--porcelain);}
+.why-item p{color:#a9b4c6;font-size:.88rem;margin-top:6px;}
+.counter-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(198,144,47,.2);margin-top:40px;border:1px solid rgba(198,144,47,.2);}
+.counter{background:var(--ink);padding:30px 24px;}
+.counter b{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3rem);color:var(--brass-light);font-weight:500;}
+.counter span{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin-top:6px;}
+
+/* ============ TESTIMONIALS ============ */
+.testi-wrap{max-width:800px;margin:0 auto;text-align:center;position:relative;}
+.testi-slide{display:none;}
+.testi-slide.active{display:block;animation:fadein .8s var(--ease);}
+@keyframes fadein{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.testi-quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:400;line-height:1.5;color:var(--ink);}
+.testi-who{margin-top:26px;font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--copper);text-transform:uppercase;}
+.testi-dots{display:flex;justify-content:center;gap:10px;margin-top:38px;}
+.testi-dots button{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .3s, transform .3s;cursor:pointer;}
+.testi-dots button.active{background:var(--brass);transform:scale(1.3);}
+
+/* ============ CTA BAND ============ */
+.cta-band{
+  position:relative;background:var(--ink);color:var(--porcelain);
+  padding:clamp(70px,10vw,120px) clamp(20px,6vw,80px);
+  overflow:hidden;text-align:center;
+}
+.cta-band .bg-img{position:absolute;inset:0;opacity:.22;object-fit:cover;width:100%;height:100%;filter:grayscale(60%);}
+.cta-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, var(--ink) 0%, rgba(11,22,44,.75) 50%, var(--ink) 100%);}
+.cta-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;}
+.cta-inner .eyebrow{justify-content:center;}
+.cta-inner .eyebrow::before{display:none;}
+.cta-inner h2{margin:20px 0 24px;color:var(--porcelain);}
+.cta-actions{display:flex;gap:16px;justify-content:center;margin-top:32px;flex-wrap:wrap;}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,6vw,80px);}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+.info-row{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(198,144,47,.2);}
+.info-row .ilabel{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);width:110px;flex:none;padding-top:3px;}
+.info-row .ival{font-family:var(--serif);font-size:1.15rem;color:var(--porcelain);}
+.form-field{margin-bottom:20px;}
+.form-field label{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--copper);margin-bottom:8px;}
+.form-field input, .form-field select, .form-field textarea{
+  width:100%;background:transparent;border:none;border-bottom:1px solid rgba(11,22,44,.25);
+  padding:10px 2px;font-family:var(--sans);font-size:1rem;color:var(--ink-text);
+  transition:border-color .3s;
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus{outline:none;border-color:var(--brass);}
+.form-field textarea{resize:vertical;min-height:80px;}
+.contact-card{background:var(--ink);color:var(--porcelain);padding:38px;position:relative;}
+
+/* ============ FOOTER ============ */
+footer{background:var(--ink);color:#b3bdd0;position:relative;}
+.foot-top{padding:80px clamp(20px,6vw,80px) 60px;border-bottom:1px solid rgba(198,144,47,.2);}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:50px;}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr;}}
+.foot-brand{display:flex;align-items:center;gap:12px;margin-bottom:18px;}
+.foot-brand-text{font-family:var(--serif);font-size:1.2rem;color:var(--porcelain);}
+.foot-brand-text small{display:block;font-family:var(--mono);font-size:.56rem;letter-spacing:.2em;color:var(--brass-light);margin-top:3px;}
+.foot-col h5{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass-light);margin-bottom:20px;}
+.foot-col ul{display:flex;flex-direction:column;gap:12px;}
+.foot-col a{font-size:.92rem;transition:color .3s, padding-left .3s;}
+.foot-col a:hover{color:var(--brass-light);padding-left:4px;}
+.foot-social{display:flex;gap:12px;margin-top:22px;}
+.foot-social a{width:38px;height:38px;border:1px solid rgba(198,144,47,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;color:var(--porcelain);}
+.foot-social a:hover{background:var(--brass);border-color:var(--brass);color:var(--ink);}
+.foot-bottom{
+  padding:26px clamp(20px,6vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:var(--stone);
+}
+.back-top{
+  display:flex;align-items:center;gap:8px;color:var(--brass-light);
+}
+.back-top svg{width:14px;height:14px;transition:transform .3s;}
+.back-top:hover svg{transform:translateY(-3px);}
+
+/* ============ MOBILE FIXES ============ */
+@media (max-width:960px){
+  html,body{width:100%;max-width:100%;min-width:0;overflow-x:hidden;}
+  #preloader{left:0;right:auto;width:100%;max-width:100%;}
+  header{left:0;right:0;width:100%;max-width:100%;padding:16px 18px;min-height:72px;}
+  header.scrolled{padding:12px 18px;}
+  .brand{gap:9px;min-width:0;}
+  .brand-text{font-size:.92rem;white-space:nowrap;}
+  .brand-text small{font-size:.48rem;letter-spacing:.16em;}
+  .burger{display:flex;width:42px;height:42px;margin-left:auto;padding:0;background:transparent;border-radius:0;}
+  .burger span,.burger span::before,.burger span::after{width:22px;height:2px;background:var(--ink);}
+  header.scrolled .burger span,header.scrolled .burger span::before,header.scrolled .burger span::after{background:var(--porcelain);}
+  .burger.open span::before,.burger.open span::after{background:var(--porcelain);}
+  .burger.open{z-index:1200;}
+}
+
+@media (max-width:760px){
+  .hero,.hero-media,.hero-inner,.marquee-strip{width:100%;max-width:100%;min-width:0;}
+  .hero{min-height:100svh;}
+  .hero-inner{
+    padding:0 20px 42px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .hero h1{max-width:100%;font-size:clamp(2.25rem,11vw,3.6rem);line-height:1.02;margin:0 auto;}
+  .hero-row{width:100%;justify-content:center;align-items:center;margin-top:22px;gap:22px;}
+  .hero-copy{max-width:520px;text-align:center;}
+  .hero-copy p{font-size:.92rem;line-height:1.6;}
+  .hero-actions{justify-content:center;gap:10px;margin-top:20px;}
+  .hero-actions .btn{padding:12px 16px;font-size:.68rem;}
+  .hero-meta{justify-content:center;gap:20px;width:100%;font-size:.58rem;}
+  .hero-meta div b{font-size:1.2rem;}
+  .scroll-cue{display:none;}
+  #mobile-menu{justify-content:flex-start;padding:108px 24px 30px;width:100%;max-width:100%;}
+  #mobile-menu ul{gap:0;}
+  #mobile-menu a{font-size:1.35rem;line-height:1.2;padding:8px 0;}
+  .mm-foot{margin-top:24px;font-size:.68rem;gap:7px;}
+  .mm-social{margin-top:12px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
+}
+/* ============ LIGHTBOX STYLES ============ */
+.hex {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hex:hover {
+  transform: translateY(-6px);
+}
+
+.proj-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.proj-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.proj-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.proj-lightbox-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  max-width: 1050px;
+  width: 100%;
+  background: var(--paper, #fff);
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  opacity: 0;
+}
+
+.proj-lightbox.active .proj-lightbox-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.proj-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: var(--ink, #111);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+  z-index: 3;
+}
+
+.proj-lightbox-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.proj-lightbox-media {
+  width: 100%;
+  height: 420px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.proj-lightbox-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.proj-lightbox.active .proj-lightbox-media img {
+  transform: scale(1);
+}
+
+.proj-lightbox-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.proj-lightbox-info .eyebrow {
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.proj-lightbox-info h3 {
+  font-size: clamp(24px, 3vw, 32px);
+  color: var(--ink, #111);
+  margin-bottom: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.proj-lightbox-info p {
+  color: #666;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.proj-lightbox-stats {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ink, #111);
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .proj-lightbox-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .proj-lightbox-media {
+    height: 240px;
+  }
+}
+</style>
+</head>
+<body class="lock">
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader">
+  <svg viewBox="0 0 100 100"><path d="M10 55 L50 20 L90 55 M22 46 V85 H78 V46 M40 85 V60 H60 V85" /></svg>
+  <div class="pre-word">Dream House Design</div>
+  <div class="pre-bar"><i id="pre-fill"></i></div>
+  <div class="pre-num" id="pre-num">00%</div>
+</div>
+
+<!-- ============ SCROLL RULER ============ -->
+<div id="ruler" aria-hidden="true">
+  <span class="lab">SCALE</span>
+  <div class="track"><div class="fill" id="ruler-fill"></div></div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header id="site-header">
+  <a href="#top" class="brand">
+    <img src="img/logo5.png" style="height:50px;border-radius:12px;" alt="Dream House Design Logo">
+  </a>
+  <nav class="primary-nav">
+    <a href="index.html">Home</a>
+    <a href="about/about.html">About</a>
+    <a href="services/services.html">Services</a>
+    <a href="copro/copro.html">Construction Process</a>
+    <a href="projects/projects.html">Projects</a>
+    <a href="contact/contact.html">Contact</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="tel:+919575799200"><span class="nav-call">+91 95757 99200</span></a>
+    <a href="#contact" class="btn" style="padding:12px 22px;"><span>Enquire</span></a>
+  </div>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" type="button"><span></span></button>
+</header>
+
+<!-- ============ MOBILE MENU ============ -->
+<div id="mobile-menu">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about/about.html">About</a></li>
+    <li><a href="services/services.html">Services</a></li>
+    <li><a href="copro/copro.html">Construction Process</a></li>
+    <li><a href="projects/projects.html">Projects</a></li>
+    <li><a href="contact/contact.html">Contact</a></li>
+  </ul>
+  <div class="mm-foot">
+    <span>CALL US TODAY</span>
+    <a href="tel:+919575799200">+91 95757 99200</a>
+    <!--<span style="margin-top:6px;">VISIT OUR WEBSITE</span>
+    <a href="https://www.dreamhousedesign.in">www.dreamhousedesign.in</a>-->
+    <div style="display: flex; gap: 12px; align-items: center; margin-top: 6px;">
+    <a href="https://facebook.com" target="_blank" aria-label="Facebook" style="text-decoration: none; color: inherit;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z"/></svg>
+    </a>
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram" style="text-decoration: none; color: inherit;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+    </a>
+    <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" style="text-decoration: none; color: inherit;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.34a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>
+    </a>
+    <a href="https://wa.me/919575799200" target="_blank" aria-label="WhatsApp" style="text-decoration: none; color: inherit;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    </a>
+</div>
+    <div class="mm-social">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="Pinterest">PIN</a>
+      <a href="#" aria-label="LinkedIn">IN</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <video id="hero-video" autoplay muted loop playsinline
+      poster="https://images.pexels.com/videos/17224715/architectural-design-architectural-designs-beautiful-home-building-exterior-17224715.jpeg?auto=compress&cs=tinysrgb&w=1920">
+    </video>
+  </div>
+  <div class="hero-inner">
+    <div class="eyebrow" style="color:var(--brass-light); margin-bottom:16px;">Established 2021 &bull; Residential &amp; Commercial Specialists</div>
+    <h1 class="h-display">Designing spaces,<br><em>building</em> dreams.</h1>
+    <div class="hero-row">
+      <div class="hero-copy">
+        <p>Welcome to Dream House Design — your trusted partner for residential and commercial construction. We transform plots and structures into beautifully engineered spaces.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn"><span>Start a Project</span></a>
+          <a href="#work" class="btn ghost"><span>View Our Work</span></a>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div><b>50+</b>Projects Completed</div>
+        <div><b>2021</b>Established</div>
+        <div><b>8</b>Core Solutions</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="dot"></span>Scroll to explore</div>
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>Architectural Design</span><span>Structural Engineering</span><span>Residential Construction</span><span>Commercial Construction</span><span>Turnkey Solutions</span><span>Interior Finishing</span>
+      <span>Architectural Design</span><span>Structural Engineering</span><span>Residential Construction</span><span>Commercial Construction</span><span>Turnkey Solutions</span><span>Interior Finishing</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT / SIGNATURE BLUEPRINT ============ -->
+<section class="section" id="studio">
+  <div class="container about-grid">
+    <div class="about-copy reveal-l">
+      <div class="eyebrow">The Studio</div>
+      <h2 class="h-section">Architectural vision,<br>flawlessly realized.</h2>
+      <p class="lead">Founded in 2021, Dream House Design was born from a singular conviction: that building a luxury home should be as seamless as living in one. We have evolved into a premier full-service practice, uniting uncompromising craftsmanship with absolute transparency.</p>
+      <p class="lead">From initial architectural consultation and precision engineering to curated material sourcing and meticulous execution, our integrated roof governs every detail. You experience a singular, frictionless journey from blueprint to sanctuary.</p>
+      <div class="about-stats">
+        <div class="stat"><b>50+</b><span>Masterpieces Built</span></div>
+        <div class="stat"><b>2021</b><span>Established</span></div>
+        <div class="stat"><b>100%</b><span>Turnkey Precision</span></div>
+      </div>
+    </div>
+    <div class="blueprint-wrap plate reveal-r">
+      <svg id="bp-svg" viewBox="0 0 300 300">
+        <polygon class="bp-fill" points="60,150 60,260 240,260 240,150 150,90" />
+        <path class="bp-path" d="M40 150 L150 75 L260 150" />
+        <path class="bp-path" d="M60 150 V260 H240 V150" />
+        <path class="bp-path" d="M110 260 V190 H150 V260" />
+        <path class="bp-path" d="M170 175 H220 V215 H170 Z" />
+        <path class="bp-path" d="M80 175 H105 V205 H80 Z" />
+        <path class="bp-dim" d="M40 275 H260" />
+        <path class="bp-dim" d="M40 270 V280 M260 270 V280" />
+        <text class="bp-label" x="132" y="290">14.60 M</text>
+        <path class="bp-dim" d="M275 150 V260" />
+        <text class="bp-label" x="278" y="210" transform="rotate(90 278 210)">9.20 M</text>
+      </svg>
+      <div class="blueprint-cap"><span>Elevation — Residence 04</span><span>Scale 1:100</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section" id="services" style="background:var(--paper);">
+  <div class="container">
+    <div class="svc-head reveal">
+      <div>
+        <div class="eyebrow">Expertise</div>
+        <h2 class="h-section" style="margin-top:16px;color:var(--ink);">Curated disciplines</h2>
+      </div>
+      <p class="lead">Bespoke architectural execution and comprehensive engineering services, delivered with exacting precision.</p>
+    </div>
+    <div class="svc-grid stagger">
+      <div class="svc-card reveal" style="--i:0">
+        <div class="svc-num">01</div>
+        <div>
+          <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 42 V20 L24 8 L42 20 V42 H6 Z"/><path d="M18 42V28h12v14"/></svg>
+          <div class="svc-title">Residential Architecture</div>
+          <p>Bespoke private estates, luxury villas, and sophisticated multi-family residences designed as living works of art.</p>
+        </div>
+        <ul class="svc-list"><li>Custom Estates</li><li>Luxury Villas</li><li>Duplexes</li><li>Residences</li></ul>
+      </div>
+      <div class="svc-card reveal" style="--i:1">
+        <div class="svc-num">02</div>
+        <div>
+          <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 42V10h12v32M22 42V20h16v22"/><path d="M14 16h4M14 22h4M14 28h4"/></svg>
+          <div class="svc-title">Commercial Enterprise</div>
+          <p>Flagship corporate offices, high-end retail showcases, and dynamic mixed-use structures built for lasting prestige.</p>
+        </div>
+        <ul class="svc-list"><li>Corporate Offices</li><li>Showrooms</li><li>Retail Spaces</li><li>Commercial Hubs</li></ul>
+      </div>
+      <div class="svc-card reveal" style="--i:2">
+        <div class="svc-num">03</div>
+        <div>
+          <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 42V18l18-10 18 10v24H6Z"/><path d="M18 42V26h12v16"/></svg>
+          <div class="svc-title">Design &amp; Spatial Planning</div>
+          <p>Visionary master planning, photorealistic 3D visualization, and spatial engineering optimized for light, atmosphere, and flow.</p>
+        </div>
+        <ul class="svc-list"><li>Master Layouts</li><li>3D Elevations</li><li>VR Walkthroughs</li><li>Harmonic Design</li></ul>
+      </div>
+      <div class="svc-card reveal" style="--i:3">
+        <div class="svc-num">04</div>
+        <div>
+          <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 40h32M12 40V16l12-8 12 8v24M20 40V24h8v16"/></svg>
+          <div class="svc-title">Structural Engineering</div>
+          <p>Geotechnical soil dynamics, rigorous foundation physics, and seismic-resistant frameworks engineered for timeless durability.</p>
+        </div>
+        <ul class="svc-list"><li>Soil Mechanics</li><li>Load Analysis</li><li>Seismic Safety</li></ul>
+      </div>
+      <div class="svc-card reveal" style="--i:4">
+        <div class="svc-num">05</div>
+        <div>
+          <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6h18l6 6v30H12z"/><path d="M30 6v6h6M18 22h12M18 28h12M18 34h8"/></svg>
+          <div class="svc-title">Interiors &amp; Artisanal Fit-Outs</div>
+          <p>Hand-selected material palettes, architectural lighting design, custom millwork, and refined interior finishes.</p>
+        </div>
+        <ul class="svc-list"><li>Stone &amp; Woodwork</li><li>Lighting Design</li><li>Custom Millwork</li><li>Fine Fixtures</li></ul>
+      </div>
+      <div class="svc-card reveal" style="--i:5">
+        <div class="svc-num">06</div>
+        <div>
+          <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="24" cy="16" r="6"/><path d="M10 42c0-8 6-14 14-14s14 6 14 14"/></svg>
+          <div class="svc-title">Turnkey Stewardship</div>
+          <p>An effortless, fully-managed progression from initial regulatory acquisition to the final white-glove key handover.</p>
+        </div>
+        <ul class="svc-list"><li>End-to-End</li><li>Executive Oversight</li><div>Ready-to-Live</div></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="process-strip" id="process">
+  <div class="container" style="padding:0;">
+    <div style="padding:64px clamp(20px,6vw,56px) 0;" class="reveal">
+      <div class="eyebrow">Methodology</div>
+      <h2 class="h-section" style="margin-top:16px;color:var(--ink);">The journey to your sanctuary.</h2>
+    </div>
+    <div class="process-track">
+      <div class="process-step reveal" style="--i:0">
+        <span class="pnum">01 — Discovery</span>
+        <h4>Vision &amp; Site Analysis</h4>
+        <p>A rigorous exploration of your lifestyle aspirations, spatial requirements, and comprehensive geotechnical site assessment.</p>
+      </div>
+      <div class="process-step reveal" style="--i:1">
+        <span class="pnum">02 — Architecture</span>
+        <h4>Bespoke Design &amp; Engineering</h4>
+        <p>Developing master blueprints, immersive 3D visualizations, and precision structural blueprints tailored to your topography.</p>
+      </div>
+      <div class="process-step reveal" style="--i:2">
+        <span class="pnum">03 — Curation</span>
+        <h4>Financial Transparency &amp; Permitting</h4>
+        <p>Delivering an immutable, itemized investment projection while managing all complex regulatory approvals and municipal permits.</p>
+      </div>
+      <div class="process-step reveal" style="--i:3">
+        <span class="pnum">04 — Execution</span>
+        <h4>Master Craftsmanship &amp; Build</h4>
+        <p>Supervising structural integrity, high-grade material sourcing, meticulous finishes, and continuous quality audits.</p>
+      </div>
+      <div class="process-step reveal" style="--i:4">
+        <span class="pnum">05 — Sanctuary</span>
+        <h4>White-Glove Handover</h4>
+        <p>Conducting an uncompromising final inspection before presenting you with the keys to your fully realized architectural masterpiece.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK / GALLERY ============ -->
+<section class="section" id="work" style="text-align:center;">
+  <div class="eyebrow reveal" style="justify-content:center;">Selected Portfolio</div>
+  <h2 class="h-section reveal" style="margin:16px 0 50px;color:var(--ink);">Masterpieces in form and function</h2>
+  <div class="hex-grid">
+    <div class="hex reveal" style="--i:0" onclick="openLightbox(this)" data-title="Blueprint &amp; Vision" data-category="Architectural Design" data-desc="The foundational phase of our design philosophy. We balance spatial dynamics, natural light alignment, and aesthetic rigor to translate abstract ideas into precise architectural blueprints." data-stats="Timeline: 6 Weeks | Focus: Spatial Flow &amp; Ergonomics" data-img="https://images.pexels.com/photos/6615095/pexels-photo-6615095.jpeg?auto=compress&cs=tinysrgb&w=1200">
+      <img src="https://images.pexels.com/photos/6615095/pexels-photo-6615095.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Architectural planning and blueprint drafting">
+      <div class="hex-cap"><b>Blueprint &amp; Vision</b><span>Architectural Design</span></div>
+    </div>
+    <div class="hex reveal" style="--i:1" onclick="openLightbox(this)" data-title="In Progress" data-category="Structural Craft" data-desc="Rigorous on-site execution utilizing high-grade reinforcement and advanced engineering practices. Every pillar and beam is subjected to continuous quality and safety stress audits." data-stats="Status: Active Build | Focus: Seismic Grade Structural Integrity" data-img="https://images.pexels.com/photos/19915446/pexels-photo-19915446.jpeg?auto=compress&cs=tinysrgb&w=1200">
+      <img src="https://images.pexels.com/photos/19915446/pexels-photo-19915446.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Building under construction with cranes">
+      <div class="hex-cap"><b>In Progress</b><span>Structural Craft</span></div>
+    </div>
+    <div class="hex reveal" style="--i:2" onclick="openLightbox(this)" data-title="Villa Solstice" data-category="Residential Estate" data-desc="A private residential sanctuary blending monolithic concrete finishes with warm organic timber. Features custom cantilevered overhangs, integrated smart-home ecosystems, and floor-to-ceiling glass facades." data-stats="Area: 6,500 SQ.FT. | Location: Beverly Hills" data-img="https://images.pexels.com/videos/17224715/architectural-design-architectural-designs-beautiful-home-building-exterior-17224715.jpeg?auto=compress&cs=tinysrgb&w=1200">
+      <img src="https://images.pexels.com/videos/17224715/architectural-design-architectural-designs-beautiful-home-building-exterior-17224715.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Completed modern villa exterior">
+      <div class="hex-cap"><b>Villa Solstice</b><span>Residential Estate</span></div>
+    </div>
+    <div class="hex reveal" style="--i:3" onclick="openLightbox(this)" data-title="The Meridian" data-category="Corporate Headquarters" data-desc="A state-of-the-art corporate workspace designed to foster collaboration and prestige. Incorporates acoustic baffling, energy-efficient smart glass, and an executive boardroom with panoramic skyline views." data-stats="Area: 14,000 SQ.FT. | Location: Financial District" data-img="https://images.pexels.com/photos/3801167/pexels-photo-3801167.jpeg?auto=compress&cs=tinysrgb&w=1200">
+      <img src="https://images.pexels.com/photos/3801167/pexels-photo-3801167.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Modern glass commercial office interior">
+      <div class="hex-cap"><b>The Meridian</b><span>Corporate Headquarters</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIGHTBOX MODAL ============ -->
+<div id="project-lightbox" class="proj-lightbox">
+  <div class="proj-lightbox-backdrop" onclick="closeLightbox()"></div>
+  <div class="proj-lightbox-content">
+    <button class="proj-lightbox-close" onclick="closeLightbox()" aria-label="Close modal">&times;</button>
+    <div class="proj-lightbox-media">
+      <img id="lightbox-img" src="" alt="Project detail view">
+    </div>
+    <div class="proj-lightbox-info">
+      <span id="lightbox-category" class="eyebrow"></span>
+      <h3 id="lightbox-title"></h3>
+      <p id="lightbox-desc"></p>
+      <div id="lightbox-stats" class="proj-lightbox-stats"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WHY US (dark) ============ -->
+<section class="section section-dark" id="why">
+  <div class="container why-grid">
+    <div class="reveal-l">
+      <div class="eyebrow">The Advantage</div>
+      <h2 class="h-section" style="margin-top:16px;">Forged in excellence,<br>defined by integrity.</h2>
+      <p class="lead" style="margin-top:18px;">We treat construction as an exacting discipline rather than a commodity. Here is why discerning clients entrust their most ambitious visions to Dream House Design:</p>
+      <div class="why-list">
+        <div class="why-item"><span class="wtag">01</span><div><h4>Single-Source Accountability</h4><p>An integrated practice holding absolute responsibility from initial concept to white-glove handover.</p></div></div>
+        <div class="why-item"><span class="wtag">02</span><div><h4>Uncompromising Financial Clarity</h4><p>Rigorous, immutable investment planning with total transparency and zero fiscal surprises.</p></div></div>
+        <div class="why-item"><span class="wtag">03</span><div><h4>Strict Timeline Stewardship</h4><p>Synchronized scheduling frameworks backed by proactive progress communication.</p></div></div>
+        <div class="why-item"><span class="wtag">04</span><div><h4>Hand-Selected Materiality</h4><p>Only certified structural steel, grade-A aggregates, and uncompromising finishes enter our sites.</p></div></div>
+        <div class="why-item"><span class="wtag">05</span><div><h4>Elite Craftsmanship</h4><p>Visionary architects, master structural engineers, and master builders united under one roof.</p></div></div>
+      </div>
+    </div>
+    <div class="reveal-r">
+      <div class="counter-grid">
+        <div class="counter"><b data-count="50">0</b><span>Masterpieces Built</span></div>
+        <div class="counter"><b data-count="2021">0</b><span>Established</span></div>
+        <div class="counter"><b data-count="100">0</b><span>% Dedication</span></div>
+        <div class="counter"><b data-count="100">0</b><span>% Transparency</span></div>
+      </div>
+      <div class="blueprint-wrap plate" style="margin-top:1px;">
+        <svg viewBox="0 0 300 220">
+          <path class="bp-path" d="M20 200 H280" />
+          <path class="bp-path" d="M40 200 V120 H100 V200" />
+          <path class="bp-path" d="M120 200 V70 H190 V200" />
+          <path class="bp-path" d="M210 200 V140 H260 V200" />
+          <path class="bp-dim" d="M40 60 L120 30 L210 60" />
+          <text class="bp-label" x="90" y="45">SITE MASSING — CONCEPT 02</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section" style="background:var(--paper);">
+  <div class="testi-wrap reveal">
+    <div class="eyebrow" style="justify-content:center;margin-bottom:26px;">Client Perspectives</div>
+    <div class="testi-slide active">
+      <p class="testi-quote">"They translated our vision into an extraordinary living space with effortless grace. From first blueprint to white-glove handover, the level of precision was exceptional."</p>
+      <div class="testi-who">A. Sharma — Private Estate Owner</div>
+    </div>
+    <div class="testi-slide">
+      <p class="testi-quote">"Our commercial showroom was engineered and executed with ruthless efficiency and absolute architectural fidelity. A truly elite practice."</p>
+      <div class="testi-who">R. Mehta — Director, Retail Group</div>
+    </div>
+    <div class="testi-slide">
+      <p class="testi-quote">"The site supervision and fiscal transparency completely transformed what is usually a stressful endeavor into a reassuring, seamless journey."</p>
+      <div class="testi-who">S. Iyer — Residential Client</div>
+    </div>
+    <div class="testi-dots">
+      <button class="active" data-i="0"></button>
+      <button data-i="1"></button>
+      <button data-i="2"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="cta-band">
+  <img class="bg-img" src="https://images.pexels.com/photos/19915446/pexels-photo-19915446.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="">
+  <div class="cta-inner reveal">
+    <div class="eyebrow">Architectural Vision</div>
+    <h2 class="h-section">Ready to build your architectural masterpiece?</h2>
+    <p class="lead" style="margin:0 auto;color:white;">Initiate a private consultation and comprehensive site analysis with our senior partners today.</p>
+    <div class="cta-actions">
+      <a href="tel:+919575799200" class="btn"><span>Call +91 95757 99200</span></a>
+      <a href="#contact" class="btn ghost"><span>Schedule Private Consultation</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact">
+  <div class="container contact-grid">
+    <div class="reveal-l">
+      <div class="eyebrow">Private Inquiry</div>
+      <h2 class="h-section" style="margin:16px 0 26px;color:var(--ink);">Initiate your collaboration</h2>
+      <p class="lead" style="margin-bottom:10px;">Connect with our senior architectural team to arrange your bespoke consultation and site evaluation.</p>
+      <form onsubmit="return false;" style="margin-top:30px;max-width:520px;">
+        <div class="form-field"><label>Full Name</label><input type="text" placeholder="Your name" required></div>
+        <div class="form-field"><label>Phone Number</label><input type="text" placeholder="Your mobile number" required></div>
+        <div class="form-field"><label>Project Type</label>
+          <select>
+            <option>Residential Architecture</option>
+            <option>Commercial Enterprise</option>
+            <option>Design &amp; Spatial Planning</option>
+            <option>Structural Engineering</option>
+            <option>Turnkey Stewardship</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Location / Vision</label><textarea placeholder="Plot location, approximate scale, spatial requirements..."></textarea></div>
+        <button type="submit" class="btn"><span>Submit Inquiry</span></button>
+      </form>
+    </div>
+    <div class="reveal-r">
+      <div class="contact-card plate">
+        <div class="eyebrow">Practice Headquarters</div>
+        <div style="margin-top:24px;">
+          <div class="info-row"><span class="ilabel">Direct</span><span class="ival">+91 95757 99200</span></div>
+          <div class="info-row"><span class="ilabel">Inquiries</span><span class="ival" style="font-size:0.95rem;">dreamhousedesign27@gmail.com</span></div>
+          <div class="info-row"><span class="ilabel">Web</span><span class="ival">www.dreamhousedesign.in</span></div>
+          <div class="info-row" style="border-bottom:none;"><span class="ilabel">Hours</span><span class="ival" style="font-size:0.9rem;">Mon – Sat: 9:00 AM – 7:00 PM</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="foot-top">
+    <div class="container foot-grid">
+      <div>
+        <div class="foot-brand" style="align-items: center;">
+          <img src="img/logo5.png" style="height:60px;background: rgba(255, 255, 255, 0.9);border-radius: 10px;" alt="Dream House Design">
+        </div>
+        <p style="max-width:32ch;font-size:.9rem;">Bespoke architectural practice and turnkey construction specialists, shaping timeless living and commercial sanctuaries.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+          <a href="https://wa.me/919575799200" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path><path d="M9 10a0.5.5 0 0 0 1 0V9a0.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a0.5.5 0 0 0 0-1h-1a0.5.5 0 0 0 0 1"></path></svg>
+</a>
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Expertise</h5>
+        <ul>
+          <li><a href="#services">Residential Architecture</a></li>
+          <li><a href="#services">Commercial Enterprise</a></li>
+          <li><a href="#services">Design &amp; Spatial Planning</a></li>
+          <li><a href="#services">Structural Engineering</a></li>
+          <li><a href="#services">Turnkey Stewardship</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Practice</h5>
+        <ul>
+          <li><a href="#studio">The Studio</a></li>
+          <li><a href="#process">Methodology</a></li>
+          <li><a href="#work">Portfolio</a></li>
+          <li><a href="#why">The Advantage</a></li>
+          <li><a href="#contact">Private Inquiry</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Direct</h5>
+        <ul>
+          <li><a href="tel:+919575799200">+91 95757 99200</a></li>
+          <li><a href="https://www.dreamhousedesign.in">www.dreamhousedesign.in</a></li>
+          <li>Mon – Sat: 9:00 AM – 7:00 PM</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© <span id="year"></span> Dream House Design. All rights reserved. Established 2021.</span>
+    <a href="#top" class="back-top">Back to top <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- PRELOADER ---------- */
+(function(){
+  const pre = document.getElementById('preloader');
+  const fill = document.getElementById('pre-fill');
+  const num = document.getElementById('pre-num');
+  let p = 0;
+  const iv = setInterval(()=>{
+    p += Math.random()*14;
+    if(p>=100){ p = 100; clearInterval(iv); }
+    fill.style.width = p+'%';
+    num.textContent = Math.floor(p)+'%';
+  }, 160);
+  window.addEventListener('load', ()=>{
+    setTimeout(()=>{
+      fill.style.width='100%'; num.textContent='100%';
+      setTimeout(()=>{
+        pre.classList.add('done');
+        document.body.classList.remove('lock');
+      }, 350);
+    }, 900);
+  });
+  setTimeout(()=>{
+    pre.classList.add('done');
+    document.body.classList.remove('lock');
+  }, 4500);
+})();
+
+/* ---------- HERO VIDEO ---------- */
+(function(){
+  const video = document.getElementById('hero-video');
+  const desktopSrc = 'https://videos.pexels.com/video-files/17224715/17224715-uhd_2560_1440_30fps.mp4';
+  const mobileSrc = 'https://videos.pexels.com/video-files/17211925/17211925-hd_1920_1080_30fps.mp4';
+  function setSource(){
+    const isMobile = window.matchMedia('(max-width: 760px)').matches;
+    const wanted = isMobile ? mobileSrc : desktopSrc;
+    if(video.dataset.current === wanted) return;
+    video.dataset.current = wanted;
+    video.src = wanted;
+    video.load();
+    video.play().catch(()=>{});
+  }
+  setSource();
+  let rt;
+  window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(setSource, 350); });
+})();
+
+/* ---------- HEADER SCROLL STATE + RULER ---------- */
+(function(){
+  const header = document.getElementById('site-header');
+  const rulerFill = document.getElementById('ruler-fill');
+  const darkSections = Array.from(document.querySelectorAll('.hero, .section-dark, .cta-band'));
+  function onScroll(){
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max>0 ? (y/max)*100 : 0;
+    rulerFill.style.height = pct+'%';
+
+    const probeY = window.innerHeight*0.5;
+    let onDark = false;
+    darkSections.forEach(sec=>{
+      const r = sec.getBoundingClientRect();
+      if(r.top <= probeY && r.bottom >= probeY) onDark = true;
+    });
+    document.body.classList.toggle('on-light', !onDark);
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+/* ---------- MOBILE MENU ---------- */
+(function(){
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobile-menu');
+  burger.addEventListener('click', ()=>{
+    const open = burger.classList.toggle('open');
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('lock', open);
+  });
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
+    burger.classList.remove('open');
+    menu.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Open menu');
+    document.body.classList.remove('lock');
+  }));
+})();
+
+/* ---------- SCROLL REVEALS ---------- */
+(function(){
+  const els = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.16, rootMargin:'0px 0px -60px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ---------- BLUEPRINT DRAW ---------- */
+(function(){
+  document.querySelectorAll('.blueprint-wrap svg').forEach(svg=>{
+    const paths = svg.querySelectorAll('.bp-path, .bp-dim');
+    paths.forEach(p=>{
+      const len = p.getTotalLength();
+      p.style.strokeDasharray = len;
+      p.style.strokeDashoffset = len;
+      p.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(.22,1,.36,1)';
+    });
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          paths.forEach((p,i)=> setTimeout(()=>{ p.style.strokeDashoffset = 0; }, i*140) );
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:.35});
+    io.observe(svg);
+  });
+})();
+
+/* ---------- COUNTERS ---------- */
+(function(){
+  const counters = document.querySelectorAll('[data-count]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.count,10);
+      const dur = 1400;
+      const t0 = performance.now();
+      function tick(t){
+        const p = Math.min((t-t0)/dur,1);
+        const eased = 1 - Math.pow(1-p, 3);
+        el.textContent = Math.floor(eased*target);
+        if(p<1) requestAnimationFrame(tick); else el.textContent = target;
+      }
+      requestAnimationFrame(tick);
+      io.unobserve(el);
+    });
+  }, {threshold:.5});
+  counters.forEach(c=>io.observe(c));
+})();
+
+/* ---------- TESTIMONIAL SLIDER ---------- */
+(function(){
+  const slides = document.querySelectorAll('.testi-slide');
+  const dots = document.querySelectorAll('.testi-dots button');
+  let i = 0, timer;
+  function show(n){
+    slides[i].classList.remove('active'); dots[i].classList.remove('active');
+    i = n;
+    slides[i].classList.add('active'); dots[i].classList.add('active');
+  }
+  function next(){ show((i+1)%slides.length); }
+  dots.forEach(d=>d.addEventListener('click', ()=>{ show(parseInt(d.dataset.i,10)); restart(); }));
+  function restart(){ clearInterval(timer); timer = setInterval(next, 6000); }
+  restart();
+})();
+</script>
+<script>
+/* ============ LIGHTBOX SCRIPT ============ */
+function openLightbox(element) {
+  const lightbox = document.getElementById('project-lightbox');
+  const img = document.getElementById('lightbox-img');
+  const title = document.getElementById('lightbox-title');
+  const category = document.getElementById('lightbox-category');
+  const desc = document.getElementById('lightbox-desc');
+  const stats = document.getElementById('lightbox-stats');
+
+  img.src = element.getAttribute('data-img');
+  title.textContent = element.getAttribute('data-title');
+  category.textContent = element.getAttribute('data-category');
+  desc.textContent = element.getAttribute('data-desc');
+  stats.textContent = element.getAttribute('data-stats');
+
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('project-lightbox');
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
+});
+</script>
+</body>
+</html>
