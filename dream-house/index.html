@@ -83,7 +83,6 @@ p{line-height:1.7;color:inherit;}
 .lead{font-size:clamp(1.02rem,1.0vw,1.2rem);color:var(--navy-primary);max-width:48ch;}
 .section-dark .lead{color:#B3BDD0;}
 
-/* Buttons: Gold fill with deep navy text, smoothly transitions on hover */
 .btn{
   display:inline-flex;align-items:center;gap:.6em;
   padding:16px 30px;
@@ -115,7 +114,6 @@ p{line-height:1.7;color:inherit;}
 .section-dark .btn.ghost::before{background:var(--gold-primary);}
 .section-dark .btn.ghost:hover{color:var(--navy-primary);border-color:var(--gold-primary);}
 
-/* corner registration marks — blueprint sheet motif */
 .plate{position:relative;}
 .plate::before,.plate::after,.plate .cm-tr,.plate .cm-bl{
   content:"";position:absolute;width:14px;height:14px;
@@ -132,7 +130,7 @@ p{line-height:1.7;color:inherit;}
   transition:opacity .8s var(--ease), visibility .8s var(--ease);
 }
 #preloader.done{opacity:0;visibility:hidden;pointer-events:none;}
-#preloader .pre-logo-img{width:180px;height:auto;margin-bottom:20px;}
+#preloader .pre-logo-img{width:180px;height:auto;margin-bottom:20px;object-fit:contain;}
 .pre-word{
   font-family:var(--serif);font-size:.9rem;letter-spacing:.25em;text-transform:uppercase;
   color:var(--gold-primary);margin-top:10px;
@@ -164,6 +162,7 @@ body.on-light #ruler .lab{color:var(--gold-dark);}
 .logo-img {
   height: 48px;
   width: auto;
+  max-width: 180px;
   object-fit: contain;
 }
 
@@ -299,7 +298,7 @@ nav.primary-nav a:hover, nav.primary-nav a.active{color:var(--gold-primary);}
 .stat b{display:block;font-family:var(--serif);font-size:clamp(2rem,3.4vw,2.7rem);color:var(--navy-primary);font-weight:500;}
 .stat span{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dark);}
 
-/* Dark Sections & Blueprint SVG Line Paths (#E5B757) */
+/* Dark Sections & Blueprint SVG Line Paths */
 .blueprint-wrap{
   position:relative;background:var(--navy-primary);border:1px solid var(--line-gold);
   aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:20px;
@@ -317,7 +316,6 @@ nav.primary-nav a:hover, nav.primary-nav a.active{color:var(--gold-primary);}
 /* ============ SERVICES ============ */
 .svc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:56px;}
 
-/* Cards & Service Items: Light porcelain cards with gold border transitioning to deep navy on hover */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-gold);border:1px solid var(--line-gold);}
 @media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:600px){.svc-grid{grid-template-columns:1fr;}}
@@ -431,7 +429,6 @@ nav.primary-nav a:hover, nav.primary-nav a.active{color:var(--gold-primary);}
 .info-row .ilabel{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-light);width:110px;flex:none;padding-top:3px;}
 .info-row .ival{font-family:var(--serif);font-size:1.15rem;color:var(--porcelain);}
 
-/* Form Inputs & Labels Focus Rules */
 .form-field{margin-bottom:20px;}
 .form-field label{
   display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
@@ -442,7 +439,6 @@ nav.primary-nav a:hover, nav.primary-nav a.active{color:var(--gold-primary);}
   padding:12px 2px;font-family:var(--sans);font-size:1rem;color:var(--navy-primary);
   transition:border-color .3s, background-color .3s;
 }
-/* Metallic Gold bottom border on focus */
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus{
   outline:none;
   border-bottom-color:var(--gold-primary);
@@ -527,8 +523,8 @@ footer{background:var(--navy-primary);color:#B3BDD0;position:relative;}
 
 <!-- ============ PRELOADER ============ -->
 <div id="preloader">
-<!-- Preloader Logo -->
-<img src="./img/logo8.png" alt="Dream House Design Logo" class="pre-logo-img">
+  <!-- Preloader Logo with absolute path fallback -->
+  <img src="/img/logo8.png" alt="Dream House Design Logo" class="pre-logo-img" onerror="this.onerror=null; this.src='img/logo8.png';">
   <div class="pre-word">DREAM HOUSE DESIGN</div>
   <div class="pre-bar"><i id="pre-fill"></i></div>
   <div class="pre-num" id="pre-num">00%</div>
@@ -543,8 +539,8 @@ footer{background:var(--navy-primary);color:#B3BDD0;position:relative;}
 <!-- ============ HEADER / LOGO INTEGRATION ============ -->
 <header id="site-header">
   <a href="#top" class="logo-brand" aria-label="Dream House Design Home">
-<!-- Header Logo -->
-<img src="./img/logo8.png" alt="Dream House Design Logo" class="logo-img">
+    <!-- Header Logo with absolute path + fallback -->
+    <img src="/img/logo8.png" alt="Dream House Design Logo" class="logo-img" onerror="this.onerror=null; this.src='img/logo8.png';">
   </a>
 
   <nav class="primary-nav">
@@ -641,7 +637,6 @@ footer{background:var(--navy-primary);color:#B3BDD0;position:relative;}
         <div class="stat"><b>100%</b><span>Turnkey Execution</span></div>
       </div>
     </div>
-    <!-- Dark Blueprint Card with Glowing Gold Lines -->
     <div class="blueprint-wrap plate reveal-r">
       <svg id="bp-svg" viewBox="0 0 300 300">
         <polygon class="bp-fill" points="60,150 60,260 240,260 240,150 150,90" />
@@ -791,7 +786,7 @@ footer{background:var(--navy-primary);color:#B3BDD0;position:relative;}
   </div>
 </section>
 
-<!-- ============ WHY US (Dark Blueprint Elements) ============ -->
+<!-- ============ WHY US ============ -->
 <section class="section section-dark" id="why">
   <div class="container why-grid">
     <div class="reveal-l">
@@ -909,7 +904,8 @@ footer{background:var(--navy-primary);color:#B3BDD0;position:relative;}
       <div>
         <div class="foot-brand">
           <a href="#top" class="logo-brand" aria-label="Dream House Design Footer Logo">
-            <img src="./img/logo8.png" alt="Dream House Design Logo" class="logo-img">
+            <!-- Footer Logo with absolute path + fallback -->
+            <img src="/img/logo8.png" alt="Dream House Design Logo" class="logo-img" onerror="this.onerror=null; this.src='img/logo8.png';">
           </a>
         </div>
         <p style="max-width:32ch;font-size:.9rem;margin-top:14px;">Residential &amp; commercial construction specialists delivering quality builds from foundation to handover.</p>
@@ -938,7 +934,7 @@ footer{background:var(--navy-primary);color:#B3BDD0;position:relative;}
         <h5>Contact</h5>
         <ul>
           <li><a href="tel:+919575799200">+91 95757 99200</a></li>
-          <li><a href="build@dreamhousedesign.in">build@dreamhousedesign.in</a></li>
+          <li><a href="mailto:dreamhousedesign27@gmail.com">dreamhousedesign27@gmail.com</a></li>
           <li>Mon – Sat: 9AM – 7PM</li>
         </ul>
       </div>
